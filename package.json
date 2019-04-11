@@ -1,0 +1,30 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron main.js",
+    "start": "electron .",
+    "build": "electron-packager . neko --platform=darwin --arch=x64 --electron-version=4.0.1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "ipc": "0.0.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "electron": "^4.0.1",
+    "electron-builder": "^20.38.5"
+  },
+  "build": {
+    "appId": "nico-slide",
+    "mac": {
+      "category": "presentation support"
+    }
+  },
+  "author": "neko",
+  "license": "MIT"
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+     * {
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+     }
+     html, body {
+       height: 100%;
+       perspective: 1000px;
+     }
+    /* .comment { */
+    /*     position: absolute; */
+    /*     width: 100%; */
+    /*     font-size: 30px; */
+    /*     padding-left: 100%; */
+    /*     white-space: nowrap; */
+    /*  */
+    /*     animation-name: nico; */
+    /*     animation-duration: 6s; */
+    /*     animation-timing-function: linear; */
+    /*     animation-iteration-count: infinite; */
+    /* } */
+    /* @keyframes nico { */
+    /*     0% { transform: translateX(0); }  */
+    /*     100% { transform: translate(-120%); } */
+    /* } */
+    </style>
+  </head>
+  <body>
+    <webview
+      src="https://tweetdeck.com"
+      preload="tweetdeck.js"
+      style="display: none">
+    </webview>
+    <script>
+      const { ipcRenderer } = require('electron');
+      const webview = document.querySelector('webview');
+      const comments = [];
+
+
+      const startComment = (comment) => {
+        const intervalId = setInterval(frame, 100);
+        function frame() {
+          const top = comment.style.top;
+          const left = parseInt(comment.style.left, 10);
+          if (left < 0) {
+            console.log('delete comment');
+            document.removeChild(comment);
+            clearInterval(intervalId);
+            return;
+          } else {
+            console.log('move comment');
+            comment.setAttribute("style", `top: ${top}; left: ${left - 1}px;`); 
+            return;
+          }
+        }
+      }
+      
+      const createComment = (text) => {
+        const comment = document.createElement('div'); 
+        comment.className = 'comment';
+        let top = parseInt(Math.random() * window.outerHeight, 10);
+        const left = parseInt(Math.random() * window.outerWidth, 10);
+        top>window.outerHeight? top - 30:null;
+        comment.setAttribute("style", `top: ${top}px; left: ${left}px`);
+        comment.textContent = text;
+        document.body.appendChild(comment);
+        // startComment(comment);
+      }
+
+      const main = (tweets) => {
+        // tweets.forEach(tweet => {
+        //   if (!comments.includes(tweet)) {
+        //     comments.push(tweet);
+        //     createComment(tweet);
+        //   }
+        // });
+        if (!comments.includes(tweets[0])) {
+          comments.push(tweets[0]);
+          createComment(tweets[0]);
+        }
+      }
+
+      webview.addEventListener("ipc-message", (event) => {
+        switch (event.channel) {
+          case "getTweets":
+            if (!event.args[0].length) {
+              webview.setAttribute("style", "min-width: 800px; min-height:1200px");
+              // ipcRenderer.send('twitterStatus', false);
+            } else {
+              webview.setAttribute("style", "display: none");
+              // ipcRenderer.send('twitterStatus', true);
+              main(event.args[0]); 
+            }
+            break;
+        }
+      })
+
+      setTimeout(()=>{
+        webview.send("getTweets");
+        setInterval(()=>{
+          webview.send("getTweets");
+        }, 1000);
+      }, 5000);
+    </script>
+  </body>
+</html>
