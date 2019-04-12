@@ -6,17 +6,12 @@
   "scripts": {
     "dev": "electron main.js",
     "start": "electron .",
-    "build": "electron-packager . neko --platform=darwin --arch=x64 --electron-version=4.0.1",
+    "build": "electron-packager . nicoSlide --platform=darwin --arch=x64 --electron-version=4.0.1",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
-  "dependencies": {
-    "express": "^4.16.4",
-    "ipc": "0.0.1",
-    "socket.io": "^2.2.0"
-  },
   "devDependencies": {
-    "electron": "^4.0.1",
+    "electron": "^4.1.4",
     "electron-builder": "^20.38.5"
   },
   "build": {

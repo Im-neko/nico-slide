@@ -1,6 +1,5 @@
 const electron = require('electron');
 const { ipcMain } = require('electron');
-const io = require('socket.io');
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
