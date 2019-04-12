@@ -1,2 +1,2 @@
 # nico-slide
-niconico風にコメントを投稿できるpdf表示アプリ
+niconico風にツイートを取得して来て表示するデスクトップアプリ
