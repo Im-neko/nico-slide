@@ -7,6 +7,6 @@ niconico風にツイートを取得して来て表示するデスクトップア
 という物です。
 twitter自体に負荷掛けている訳でも、APIの不正利用でもないです。
 
-規約も確認しましたが、おそらく問題ないはず...
-https://help.twitter.com/ja/rules-and-policies/twitter-rules
+[規約](https://help.twitter.com/ja/rules-and-policies/twitter-rules)も確認しましたが、おそらく問題ないはず...
+
 もし「この条項に抵触してるのでは？」という物があった場合はneko@im-neko.netまでメールなり、twitter: @im_nukoまでご連絡お願いします。
