@@ -24,7 +24,7 @@
     <webview
       src="https://tweetdeck.com"
       preload="tweetdeck.js"
-      style="display: none">
+      style="display: none;">
     </webview>
     <script>
       const { ipcRenderer } = require('electron');
@@ -56,7 +56,7 @@
         comment.className = 'comment';
         let top = parseInt(Math.random() * window.outerHeight, 10);
         const left = parseInt(Math.random() * window.outerWidth, 10);
-        top>window.outerHeight? top - 30:null;
+        top>window.outerHeight? top - fontSize:null;
         comment.setAttribute("style", `top: ${top}px; left: ${left}px`);
         comment.textContent = text;
         await document.body.appendChild(comment);
