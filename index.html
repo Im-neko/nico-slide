@@ -55,7 +55,7 @@
         const comment = document.createElement('div'); 
         comment.className = 'comment';
         let top = parseInt(Math.random() * window.outerHeight, 10);
-        const left = parseInt(Math.random() * window.outerWidth, 10);
+        const left = parseInt(window.outerWidth+(Math.random()*window.outerWidth), 10);
         top>window.outerHeight? top - fontSize:null;
         comment.setAttribute("style", `top: ${top}px; left: ${left}px`);
         comment.textContent = text;
