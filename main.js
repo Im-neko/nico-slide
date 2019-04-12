@@ -19,14 +19,14 @@ app.on('ready', function() {
   let mainWindow = new BrowserWindow({
     left: 0,
     top: 0,
-    width: 1200,
-    height: 600,
+    width,
+    height,
     frame: true,
     show: true,
     transparent: true,
-    resizable: true,
+    resizable: false,
     titleBarStyle: 'hidden',
-    alwaysOnTop: false,
+    alwaysOnTop: true,
   })
 
   mainWindow.maximize();
