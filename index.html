@@ -12,22 +12,12 @@
        height: 100%;
        perspective: 1000px;
      }
-    /* .comment { */
-    /*     position: absolute; */
-    /*     width: 100%; */
-    /*     font-size: 30px; */
-    /*     padding-left: 100%; */
-    /*     white-space: nowrap; */
-    /*  */
-    /*     animation-name: nico; */
-    /*     animation-duration: 6s; */
-    /*     animation-timing-function: linear; */
-    /*     animation-iteration-count: infinite; */
-    /* } */
-    /* @keyframes nico { */
-    /*     0% { transform: translateX(0); }  */
-    /*     100% { transform: translate(-120%); } */
-    /* } */
+    .comment {
+        position: absolute;
+        font-size: 30px;
+        white-space: nowrap;
+
+    }
     </style>
   </head>
   <body>
@@ -40,27 +30,28 @@
       const { ipcRenderer } = require('electron');
       const webview = document.querySelector('webview');
       const comments = [];
+      const fontSize = 30;
+      const speed = 3;
 
 
       const startComment = (comment) => {
-        const intervalId = setInterval(frame, 100);
+        const commentLength = comment.textContent.length;
+        const intervalId = setInterval(frame, 10);
         function frame() {
           const top = comment.style.top;
           const left = parseInt(comment.style.left, 10);
-          if (left < 0) {
-            console.log('delete comment');
-            document.removeChild(comment);
+          if (left+(commentLength*fontSize) < 0) {
+            document.body.removeChild(comment);
             clearInterval(intervalId);
             return;
           } else {
-            console.log('move comment');
-            comment.setAttribute("style", `top: ${top}; left: ${left - 1}px;`); 
+            comment.setAttribute("style", `top: ${top}; left: ${left - speed}px;`); 
             return;
           }
         }
       }
       
-      const createComment = (text) => {
+      const createComment = async (text) => {
         const comment = document.createElement('div'); 
         comment.className = 'comment';
         let top = parseInt(Math.random() * window.outerHeight, 10);
@@ -68,21 +59,17 @@
         top>window.outerHeight? top - 30:null;
         comment.setAttribute("style", `top: ${top}px; left: ${left}px`);
         comment.textContent = text;
-        document.body.appendChild(comment);
-        // startComment(comment);
+        await document.body.appendChild(comment);
+        startComment(comment);
       }
 
       const main = (tweets) => {
-        // tweets.forEach(tweet => {
-        //   if (!comments.includes(tweet)) {
-        //     comments.push(tweet);
-        //     createComment(tweet);
-        //   }
-        // });
-        if (!comments.includes(tweets[0])) {
-          comments.push(tweets[0]);
-          createComment(tweets[0]);
-        }
+        tweets.forEach(tweet => {
+          if (!comments.includes(tweet)) {
+            comments.push(tweet);
+            createComment(tweet);
+          }
+        });
       }
 
       webview.addEventListener("ipc-message", (event) => {
@@ -90,10 +77,10 @@
           case "getTweets":
             if (!event.args[0].length) {
               webview.setAttribute("style", "min-width: 800px; min-height:1200px");
-              // ipcRenderer.send('twitterStatus', false);
+              ipcRenderer.send('twitterStatus', false);
             } else {
               webview.setAttribute("style", "display: none");
-              // ipcRenderer.send('twitterStatus', true);
+              ipcRenderer.send('twitterStatus', true);
               main(event.args[0]); 
             }
             break;

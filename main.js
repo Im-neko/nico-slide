@@ -30,10 +30,9 @@ app.on('ready', function() {
     alwaysOnTop: false,
   })
 
-  //mainWindow.setIgnoreMouseEvents(true)
-  //mainWindow.maximize();
+  mainWindow.maximize();
   mainWindow.loadURL('file://' + __dirname + '/index.html')
-  mainWindow.openDevTools(); 
+  // mainWindow.openDevTools(); 
   mainWindow.on('closed', function() {
     mainWindow = null
   });
