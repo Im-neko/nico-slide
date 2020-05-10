@@ -1,5 +1,5 @@
 {
-  "name": "nico-slide",
+  "name": "nicoSlide",
   "version": "1.0.1",
   "description": "",
   "main": "main.js",
@@ -15,7 +15,7 @@
     "electron-builder": "^20.38.5"
   },
   "build": {
-    "appId": "nico-slide",
+    "appId": "nicoSlide",
     "mac": {
       "category": "presentation support"
     }
