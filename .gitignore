@@ -1,3 +1,8 @@
+# user defined
+*.swp
+.DS_Store
+dist
+
 # Logs
 logs
 *.log
