@@ -14,7 +14,7 @@ niconico風にツイートを取得して来て表示するデスクトップア
 ## 使い方
 ### ダウンロード && 環境構築
 - macの人
-  - build済みの物があるので[こちら](https://im-neko.dev/sfc/nicoSlide.zip)からダウンロードして利用することもできます。
+  - build済みの物があるので[こちら](https://github.com/Im-neko/nico-slide/releases/download/1.0.1/nicoSlide-darwin-x64.zip)からダウンロードして利用することもできます。
 
 - その他の方
   - このリポジトリをクローンした後、`npm install`してください。
