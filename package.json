@@ -6,9 +6,18 @@
   "scripts": {
     "dev": "electron main.js",
     "start": "electron .",
-    "build": "electron-packager . nicoSlide --platform=darwin --arch=x64 --electron-version=4.0.1",
+    "build": "electron-packager . WallTube --platform=darwin --arch=x64 --electron-version=4.0.1 --icon=img/icon.icns",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "publish": "electron-builder --mac -p always"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Im-neko/nico-slide.git"
+  },
+  "dependencies": {
+    "electron-log": "^3.0.9",
+    "electron-updater": "^4.2.0"
   },
   "devDependencies": {
     "electron": "^4.1.4",
@@ -17,9 +26,24 @@
   "build": {
     "appId": "nicoSlide",
     "mac": {
-      "category": "presentation support"
+      "category": "presentation support",
+      "target": [
+        "zip",
+        "dmg"
+      ],
+      "publish": [
+        {
+          "provider": "github",
+          "owner": "im-neko",
+          "repo": "nico-slide"
+        }
+      ]
     }
   },
-  "author": "neko",
+  "bugs": {
+    "url": "https://github.com/Im-neko/nico-slide/issues"
+  },
+  "homepage": "https://github.com/Im-neko/nico-slide#readme",
+  "author": "im-neko",
   "license": "MIT"
 }

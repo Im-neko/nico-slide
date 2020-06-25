@@ -1,3 +1,4 @@
+const updater = require('./auto-update');
 const electron = require('electron');
 const { ipcMain } = require('electron');
 
@@ -31,7 +32,7 @@ app.on('ready', function() {
 
   mainWindow.maximize();
   mainWindow.loadURL('file://' + __dirname + '/index.html')
-  // mainWindow.openDevTools(); 
+  //mainWindow.openDevTools(); 
   mainWindow.on('closed', function() {
     mainWindow = null
   });

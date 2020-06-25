@@ -18,7 +18,7 @@
         font-size: 36pt;
         font-family: sans-serif;
         letter-spacing: 4px;
-        color: #FFFFFF;
+        color: #F0F0F0;
         text-shadow    : 
              2px  2px 1px #000000,
             -2px  2px 1px #000000,
@@ -51,7 +51,7 @@
         function frame() {
           const top = comment.style.top;
           const left = parseInt(comment.style.left, 10);
-          if (left+(commentLength*fontSize) < 0) {
+          if (left+(commentLength*fontSize*2) < 0) {
             document.body.removeChild(comment);
             clearInterval(intervalId);
             return;
@@ -65,9 +65,12 @@
       const createComment = async (text) => {
         const comment = document.createElement('div'); 
         comment.className = 'comment';
-        let top = parseInt(Math.random() * window.outerHeight, 10);
+        // Make space upside and downside
+        let top = fontSize + parseInt(
+          Math.random() * (window.outerHeight - fontSize * 3), 
+          10
+        );
         const left = parseInt(window.outerWidth+(Math.random()*window.outerWidth), 10);
-        top>window.outerHeight? top - fontSize:null;
         comment.setAttribute("style", `top: ${top}px; left: ${left}px`);
         comment.textContent = text;
         await document.body.appendChild(comment);
@@ -102,7 +105,7 @@
         webview.send("getTweets");
         setInterval(()=>{
           webview.send("getTweets");
-        }, 1000);
+        }, 300);
       }, 5000);
     </script>
   </body>
